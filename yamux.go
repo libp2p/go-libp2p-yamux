@@ -5,7 +5,7 @@ import (
 	"net"
 
 	smux "github.com/libp2p/go-stream-muxer"
-	yamux "github.com/whyrusleeping/yamux"
+	yamux "github.com/libp2p/go-yamux"
 )
 
 // Conn is a connection to a remote peer.
