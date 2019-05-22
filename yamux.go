@@ -55,6 +55,9 @@ func init() {
 	config.MaxStreamWindowSize = uint32(16 * 1024 * 1024)
 	// don't spam
 	config.LogOutput = ioutil.Discard
+	// We always run over a security transport that buffers internally
+	// (i.e., uses a block cipher).
+	config.ReadBufSize = 0
 	DefaultTransport = (*Transport)(config)
 }
 
