@@ -1,13 +1,25 @@
-# go-smux-multistream - a go-stream-muxer shim for multistream
+# go-libp2p-yamux
 
-[![](https://img.shields.io/badge/made%20by-Protocol%20Labs-blue.svg?style=flat-square)](http://ipn.io) [![](https://img.shields.io/badge/freenode-%23ipfs-blue.svg?style=flat-square)](http://webchat.freenode.net/?channels=%23ipfs) ![](https://raw.githubusercontent.com/libp2p/go-stream-muxer/master/img/badge.png)
+[![](https://img.shields.io/badge/made%20by-Protocol%20Labs-blue.svg?style=flat-square)](https://protocol.ai)
+[![](https://img.shields.io/badge/project-libp2p-yellow.svg?style=flat-square)](https://libp2p.io/)
+[![](https://img.shields.io/badge/freenode-%23libp2p-yellow.svg?style=flat-square)](http://webchat.freenode.net/?channels=%23libp2p)
+[![GoDoc](https://godoc.org/github.com/libp2p/go-libp2p-yamux?status.svg)](https://godoc.org/github.com/libp2p/go-libp2p-yamux)
+[![Coverage Status](https://coveralls.io/repos/github/libp2p/go-libp2p-yamux/badge.svg?branch=master)](https://coveralls.io/github/libp2p/go-libp2p-yamux?branch=master)
+[![Build Status](https://travis-ci.com/libp2p/go-libp2p-yamux.svg?branch=master)](https://travis-ci.com/libp2p/go-libp2p-yamux)
+[![Discourse posts](https://img.shields.io/discourse/https/discuss.libp2p.io/posts.svg)](https://discuss.libp2p.io)
 
-This is an implementation of the [go-stream-muxer](https://github.com/libp2p/go-stream-muxer) interface for [multistream](https://github.com/whyrusleeping/go-multistream). For more information, see that repo.
+> An adapter to integrate the yamux multiplexer into libp2p as a stream muxer.
 
-## Installation
+## Install
 
 ```sh
-go get -d github.com/whyrusleeping/go-smux-yamux
-cd $GOPATH/src/github.com/whyrusleeping/go-smux-yamux
-make deps
+go get github.com/libp2p/go-libp2p-yamux
 ```
+
+## Usage
+
+Check out the [GoDocs](https://godoc.org/github.com/libp2p/go-libp2p-yamux).
+
+## License
+
+Dual-licensed under MIT and ASLv2, by way of the [Permissive License Stack](https://protocol.ai/blog/announcing-the-permissive-license-stack/).

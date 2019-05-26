@@ -4,7 +4,7 @@ import (
 	"io/ioutil"
 	"net"
 
-	smux "github.com/libp2p/go-stream-muxer"
+	mux "github.com/libp2p/go-libp2p-core/mux"
 	yamux "github.com/libp2p/go-yamux"
 )
 
@@ -24,7 +24,7 @@ func (c *conn) IsClosed() bool {
 }
 
 // OpenStream creates a new stream.
-func (c *conn) OpenStream() (smux.Stream, error) {
+func (c *conn) OpenStream() (mux.MuxedStream, error) {
 	s, err := c.yamuxSession().OpenStream()
 	if err != nil {
 		return nil, err
@@ -34,7 +34,7 @@ func (c *conn) OpenStream() (smux.Stream, error) {
 }
 
 // AcceptStream accepts a stream opened by the other side.
-func (c *conn) AcceptStream() (smux.Stream, error) {
+func (c *conn) AcceptStream() (mux.MuxedStream, error) {
 	s, err := c.yamuxSession().AcceptStream()
 	return s, err
 }
@@ -61,7 +61,7 @@ func init() {
 	DefaultTransport = (*Transport)(config)
 }
 
-func (t *Transport) NewConn(nc net.Conn, isServer bool) (smux.Conn, error) {
+func (t *Transport) NewConn(nc net.Conn, isServer bool) (mux.MuxedConn, error) {
 	var s *yamux.Session
 	var err error
 	if isServer {

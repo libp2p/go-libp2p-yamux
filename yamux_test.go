@@ -3,9 +3,9 @@ package sm_yamux
 import (
 	"testing"
 
-	test "github.com/libp2p/go-stream-muxer/test"
+	tmux "github.com/libp2p/go-libp2p-testing/suites/mux"
 )
 
 func TestYamuxTransport(t *testing.T) {
-	test.SubtestAll(t, DefaultTransport)
+	tmux.SubtestAll(t, DefaultTransport)
 }
