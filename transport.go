@@ -8,7 +8,7 @@ import (
 	yamux "github.com/libp2p/go-yamux"
 )
 
-var DefaultTransport *Multiplexer
+var DefaultTransport *Transport
 
 func init() {
 	config := yamux.DefaultConfig()
@@ -23,14 +23,14 @@ func init() {
 	// We always run over a security transport that buffers internally
 	// (i.e., uses a block cipher).
 	config.ReadBufSize = 0
-	DefaultTransport = (*Multiplexer)(config)
+	DefaultTransport = (*Transport)(config)
 }
 
-// Multiplexer implements mux.Multiplexer that constructs
+// Transport implements mux.Multiplexer that constructs
 // yamux-backed muxed connections.
-type Multiplexer yamux.Config
+type Transport yamux.Config
 
-func (t *Multiplexer) NewConn(nc net.Conn, isServer bool) (mux.MuxedConn, error) {
+func (t *Transport) NewConn(nc net.Conn, isServer bool) (mux.MuxedConn, error) {
 	var s *yamux.Session
 	var err error
 	if isServer {
@@ -41,8 +41,8 @@ func (t *Multiplexer) NewConn(nc net.Conn, isServer bool) (mux.MuxedConn, error)
 	return (*conn)(s), err
 }
 
-func (t *Multiplexer) Config() *yamux.Config {
+func (t *Transport) Config() *yamux.Config {
 	return (*yamux.Config)(t)
 }
 
-var _ mux.Multiplexer = &Multiplexer{}
+var _ mux.Multiplexer = &Transport{}
