@@ -6,6 +6,6 @@ import (
 	tmux "github.com/libp2p/go-libp2p-testing/suites/mux"
 )
 
-func TestYamuxTransport(t *testing.T) {
+func TestDefaultMultiplexer(t *testing.T) {
 	tmux.SubtestAll(t, DefaultTransport)
 }
