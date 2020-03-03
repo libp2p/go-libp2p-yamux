@@ -12,7 +12,7 @@ type stream yamux.Stream
 
 func (s *stream) Read(b []byte) (n int, err error) {
 	n, err = s.yamux().Read(b)
-	if err == yamux.ErrConnectionReset {
+	if err == yamux.ErrStreamReset {
 		err = mux.ErrReset
 	}
 
@@ -21,7 +21,7 @@ func (s *stream) Read(b []byte) (n int, err error) {
 
 func (s *stream) Write(b []byte) (n int, err error) {
 	n, err = s.yamux().Write(b)
-	if err == yamux.ErrConnectionReset {
+	if err == yamux.ErrStreamReset {
 		err = mux.ErrReset
 	}
 
