@@ -8,41 +8,6 @@ import (
 	yamux "github.com/libp2p/go-yamux"
 )
 
-// Conn is a connection to a remote peer.
-type conn yamux.Session
-
-func (c *conn) yamuxSession() *yamux.Session {
-	return (*yamux.Session)(c)
-}
-
-func (c *conn) Close() error {
-	return c.yamuxSession().Close()
-}
-
-func (c *conn) IsClosed() bool {
-	return c.yamuxSession().IsClosed()
-}
-
-// OpenStream creates a new stream.
-func (c *conn) OpenStream() (mux.MuxedStream, error) {
-	s, err := c.yamuxSession().OpenStream()
-	if err != nil {
-		return nil, err
-	}
-
-	return s, nil
-}
-
-// AcceptStream accepts a stream opened by the other side.
-func (c *conn) AcceptStream() (mux.MuxedStream, error) {
-	s, err := c.yamuxSession().AcceptStream()
-	return s, err
-}
-
-// Transport is a go-peerstream transport that constructs
-// yamux-backed connections.
-type Transport yamux.Config
-
 var DefaultTransport *Transport
 
 func init() {
@@ -61,6 +26,10 @@ func init() {
 	DefaultTransport = (*Transport)(config)
 }
 
+// Transport implements mux.Multiplexer that constructs
+// yamux-backed muxed connections.
+type Transport yamux.Config
+
 func (t *Transport) NewConn(nc net.Conn, isServer bool) (mux.MuxedConn, error) {
 	var s *yamux.Session
 	var err error
@@ -75,3 +44,5 @@ func (t *Transport) NewConn(nc net.Conn, isServer bool) (mux.MuxedConn, error) {
 func (t *Transport) Config() *yamux.Config {
 	return (*yamux.Config)(t)
 }
+
+var _ mux.Multiplexer = &Transport{}
