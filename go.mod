@@ -1,6 +1,6 @@
 module github.com/libp2p/go-libp2p-yamux
 
-go 1.13
+go 1.15
 
 require (
 	github.com/libp2p/go-libp2p-core v0.8.0
