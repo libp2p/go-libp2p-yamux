@@ -17,7 +17,7 @@ func init() {
 	// 1MiB means a best case of 10MiB/s (83.89Mbps) on a connection with
 	// 100ms latency. The default gave us 2.4MiB *best case* which was
 	// totally unacceptable.
-	config.MaxStreamWindowSize = uint32(16 * 1024 * 1024)
+	config.InitialStreamWindowSize = uint32(16 * 1024 * 1024)
 	// don't spam
 	config.LogOutput = ioutil.Discard
 	// We always run over a security transport that buffers internally
