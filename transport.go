@@ -2,6 +2,7 @@ package sm_yamux
 
 import (
 	"io/ioutil"
+	"math"
 	"net"
 
 	"github.com/libp2p/go-libp2p-core/network"
@@ -24,7 +25,9 @@ func init() {
 	// We always run over a security transport that buffers internally
 	// (i.e., uses a block cipher).
 	config.ReadBufSize = 0
-	config.MaxIncomingStreams = 256
+	// Effectively disable the incoming streams limit.
+	// This is now dynamically limited by the resource manager.
+	config.MaxIncomingStreams = math.MaxUint32
 	DefaultTransport = (*Transport)(config)
 }
 
